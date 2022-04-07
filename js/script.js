@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             total.push(key);
         }
         
-        total = total.filter(item => /article/ig.test(item)).length;
+        total = total.filter(item => /article/i.test(item)).length;
 
         if(total){
             counter.classList.add('counter');
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     //     return await res.json();
     // }
 
-    // getData('dataTest.json')
+    // getData('data.json')
     // .then(data => {
     //     setGoods(data[0], '.headphones');
     //     setGoods(data[1], '.wireless-headphones');

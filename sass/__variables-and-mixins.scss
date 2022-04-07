@@ -1,0 +1,17 @@
+@mixin blockBackground($color) {
+    background-color: $color;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+@mixin flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+$gray: #838383;
+$hoverColor: #FFA542;
+$priceColor: #FFA542;
+$goodsNameColor: #1C1C27;
+$black: #000;

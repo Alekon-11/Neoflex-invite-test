@@ -3,7 +3,7 @@
         {
             "img": "images/headphones/AppleBYZ.png",
             "alt": "apple-byz",
-            "title": "Apple BYZ S852I",
+            "naming": "Apple BYZ S852I",
             "price": 2927,
             "rate": 4.7,
             "article": "sf8t0001"
@@ -11,7 +11,7 @@
         {
             "img": "images/headphones/AppleEarPods.png",
             "alt": "apple-earPods",
-            "title": "Apple EarPods",
+            "naming": "Apple EarPods",
             "price": 2327,
             "rate": 4.5,
             "article": "sf8t0002"
@@ -19,7 +19,7 @@
         {
             "img": "images/headphones/AppleEarPodsBox.png",
             "alt": "apple-earPods",
-            "title": "Apple EarPods",
+            "naming": "Apple EarPods",
             "price": 2327,
             "rate": 4.5,
             "article": "sf8t0003"
@@ -27,7 +27,7 @@
         {
             "img": "images/headphones/AppleBYZ.png",
             "alt": "apple-byz",
-            "title": "Apple BYZ S852I",
+            "naming": "Apple BYZ S852I",
             "price": 2927,
             "rate": 4.7,
             "article": "sf8t0004"
@@ -35,7 +35,7 @@
         {
             "img": "images/headphones/AppleEarPods.png",
             "alt": "apple-earPods",
-            "title": "Apple EarPods",
+            "naming": "Apple EarPods",
             "price": 2327,
             "rate": 4.5,
             "article": "sf8t0005"
@@ -43,7 +43,7 @@
         {
             "img": "images/headphones/AppleEarPodsBox.png",
             "alt": "apple-earPods",
-            "title": "Apple EarPods",
+            "naming": "Apple EarPods",
             "price": 2327,
             "rate": 4.5,
             "article": "sf8t0006"
@@ -53,7 +53,7 @@
         {
             "img": "images/wireless-headphones/AppleAirPods.png",
             "alt": "apple-airPods",
-            "title": "Apple AirPods",
+            "naming": "Apple AirPods",
             "price": 9527,
             "rate": 4.7,
             "article": "sf8t0007"
@@ -61,7 +61,7 @@
         {
             "img": "images/wireless-headphones/GERLAX-GH-04.png",
             "alt": "gerlax-gh04",
-            "title": "GERLAX GH-04",
+            "naming": "GERLAX GH-04",
             "price": 6527,
             "rate": 4.7,
             "article": "sf8t0008"
@@ -69,7 +69,7 @@
         {
             "img": "images/wireless-headphones/BOROFONE-BO4.png",
             "alt": "borofone-bo4",
-            "title": "BOROFONE BO4",
+            "naming": "BOROFONE BO4",
             "price": 7527,
             "rate": 4.7,
             "article": "sf8t0009"

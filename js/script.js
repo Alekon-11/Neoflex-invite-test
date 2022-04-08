@@ -5,25 +5,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
     let parent = document.querySelector('.main');
     let cart = document.querySelector('#cart');
 
-    function addCounter(parent){
-        let counter = document.createElement('div');
-        let total = [];
-
-        for(let key in sessionStorage){
-            total.push(key);
-        }
-        
-        total = total.filter(item => /article/i.test(item)).length;
-
-        if(total){
-            counter.classList.add('counter');
-            counter.textContent = total;
-            parent.append(counter);
-        }
-    }
-
-    addCounter(cart);
-
     parent.addEventListener('click', (e) => {
         let cards = document.querySelectorAll('.card');
 
@@ -46,6 +27,27 @@ document.addEventListener('DOMContentLoaded', (e) => {
             }
         });
     }
+
+    function getAllArticle(){
+        let total = [];
+        for(let key in sessionStorage){
+            total.push(key);
+        }
+        return total.filter(item => /article/i.test(item));
+    }
+
+    function addCounter(parent){
+        let counter = document.createElement('div');
+
+        if(getAllArticle().length){
+            counter.classList.add('counter');
+            counter.textContent = getAllArticle().length;
+            parent.append(counter);
+        }
+    }
+
+    addCounter(cart);
+
     //-------------------------------------------------------------- Получение данных через data.json 
 
     // async function getData(data){
@@ -72,7 +74,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/headphones/AppleBYZ.png",
             alt: 'apple-byz',
-            title: "Apple BYZ S852I",
+            naming: "Apple BYZ S852I",
             price: 2927,
             rate: 4.7,
             article: "sf8t0001"
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/headphones/AppleEarPods.png",
             alt: 'apple-earPods',
-            title: "Apple EarPods",
+            naming: "Apple EarPods",
             price: 2327,
             rate: 4.5,
             article: "sf8t0002"
@@ -88,7 +90,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/headphones/AppleEarPodsBox.png",
             alt: 'apple-earPods',
-            title: "Apple EarPods",
+            naming: "Apple EarPods",
             price: 2327,
             rate: 4.5,
             article: "sf8t0003"
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/headphones/AppleBYZ.png",
             alt: 'apple-byz',
-            title: "Apple BYZ S852I",
+            naming: "Apple BYZ S852I",
             price: 2927,
             rate: 4.7,
             article: "sf8t0004"
@@ -104,7 +106,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/headphones/AppleEarPods.png",
             alt: 'apple-earPods',
-            title: "Apple EarPods",
+            naming: "Apple EarPods",
             price: 2327,
             rate: 4.5,
             article: "sf8t0005"
@@ -112,7 +114,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/headphones/AppleEarPodsBox.png",
             alt: 'apple-earPods',
-            title: "Apple EarPods",
+            naming: "Apple EarPods",
             price: 2327,
             rate: 4.5,
             article: "sf8t0006"
@@ -123,7 +125,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/wireless-headphones/AppleAirPods.png",
             alt: 'apple-airPods',
-            title: "Apple AirPods",
+            naming: "Apple AirPods",
             price: 9527,
             rate: 4.7,
             article: "sf8t0007"
@@ -131,7 +133,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/wireless-headphones/GERLAX-GH-04.png",
             alt: 'gerlax-gh04',
-            title: "GERLAX GH-04",
+            naming: "GERLAX GH-04",
             price: 6527,
             rate: 4.7,
             article: "sf8t0008"
@@ -139,18 +141,18 @@ document.addEventListener('DOMContentLoaded', (e) => {
         {
             img: "images/wireless-headphones/BOROFONE-BO4.png",
             alt: 'borofone-bo4',
-            title: "BOROFONE BO4",
+            naming: "BOROFONE BO4",
             price: 7527,
             rate: 4.7,
             article: "sf8t0009"
         }
     ];
 
-    class Headphones{
-        constructor(img, alt, title, price, rate, article){
+    class CartItem{
+        constructor(img, alt, naming, price, rate, article){
             this.img = img;
             this.alt = alt;
-            this.title = title;
+            this.naming = naming;
             this.price = price;
             this.rate = rate;
             this.article = article;
@@ -164,7 +166,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             card.classList.add('card','goods__card');
             card.innerHTML = `<div class="card__photo"><img src="${this.img}" alt="${this.alt}"></div>
                               <div class="card__properties">
-                                  <h4 class="card__title">${this.title}</h4>
+                                  <h4 class="card__naming">${this.naming}</h4>
                                   <div class="card__price">${this.price} ₽</div>
                                   <div class="card__rate"><img src="icons/rate.svg" alt="rate-star">${this.rate}</div>
                                   <button type="button" class="card__buy-btn">Купить</button>
@@ -175,8 +177,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     function setGoods(list, parentSelector){
         for(let i = 0; i < list.length; i++){
-            const {img, alt, title, price, rate, article} = list[i];
-            new Headphones(img, alt, title, price, rate, article).addGoods(parentSelector);
+            const {img, alt, naming, price, rate, article} = list[i];
+            new CartItem(img, alt, naming, price, rate, article).addGoods(parentSelector);
         }
     }
 

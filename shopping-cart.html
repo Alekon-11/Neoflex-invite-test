@@ -27,6 +27,40 @@
                     </div>
                 </div>
             </header>
+
+            <main class="main">
+                <div class="container">
+                    <div class="selected-goods">
+
+                        <div class="title selected-goods__title">Корзина</div>
+
+                        <div class="selected-goods__wrapper">
+                            <!-- <div class="selected-goods__item">
+                                <div class="selected-goods__img">
+                                    <img src="images/headphones/AppleEarPods.png" alt="">
+                                </div>
+                                <div class="selected-goods__naming">AppleEarPods</div>
+                                <div class="selected-goods__price">2927 ₽</div>
+                                <div class="selected-goods__counter">
+                                    <button data-counter="minus"></button>
+                                    <span>1</span>
+                                    <button data-counter="plus"></button>
+                                </div>
+                                <div class="selected-goods__total">2927 ₽</div>
+                                <button class="remove selected-goods__remove">
+                                    <img src="icons/remove.png" alt="remove">
+                                </button>
+                            </div> -->
+                        </div>
+
+                        <form action="#" class="place-order">
+                            <span>ИТОГО</span>
+                            <div class="place-order__final-price">₽ 2927</div>
+                            <button type="submit" class="place-order__btn">Перейти к оформлению</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
             
             <footer class="footer">
                 <div class="container">
@@ -35,10 +69,19 @@
 
                         <nav class="nav footer__nav">
                             <ul>
-                                <li><a href="#">Избранное</a></li>
-                                <li><a href="shopping-cart.html">Корзина</a></li>
-                                <li><a href="#">Контакты</a></li>
-                                <li><a href="#">Условия сервиса</a></li>
+                                <li><a class="nav__link" href="#">Избранное</a></li>
+                                <li><a class="nav__link" href="shopping-cart.html">Корзина</a></li>
+                                <li><a class="nav__link" href="#">Контакты</a></li>
+                                <li><a class="nav__link" href="#">Условия сервиса</a></li>
+                                <li>
+                                    <div class="language">
+                                        <a href="#"><img src="icons/globe.png" alt="globe"></a>
+                                        <div class="language__wrapper">
+                                            <a href="#" class="language__item language__item_active">Рус</a>
+                                            <a href="#" class="language__item">Eng</a>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </nav>
 

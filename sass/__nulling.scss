@@ -26,6 +26,13 @@ a,button{
     outline-offset: 5px;
 }
 
+button{
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+}
+
 .wrapper{
     min-height: 100vh;
     overflow: hidden;

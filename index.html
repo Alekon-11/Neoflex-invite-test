@@ -33,13 +33,13 @@
             <main class="main">
                 <div class="container">
                     <section class="goods">
-                        <h3 class="goods__title">Наушники</h3>
+                        <h3 class="title goods__title">Наушники</h3>
     
                         <div class="goods__wrapper headphones"></div>
                     </section>
         
                     <section class="goods">
-                            <h3 class="goods__title">Беспроводные наушники</h3>
+                            <h3 class="title goods__title">Беспроводные наушники</h3>
         
                             <div class="goods__wrapper wireless-headphones"></div>
                     </section>
@@ -52,13 +52,17 @@
 
                         <nav class="nav footer__nav">
                             <ul>
-                                <li><a href="#">Избранное</a></li>
-                                <li><a href="shopping-cart.html">Корзина</a></li>
-                                <li><a href="#">Контакты</a></li>
-                                <li><a href="#">Условия сервиса</a></li>
+                                <li><a class="nav__link" href="#">Избранное</a></li>
+                                <li><a class="nav__link" href="shopping-cart.html">Корзина</a></li>
+                                <li><a class="nav__link" href="#">Контакты</a></li>
+                                <li><a class="nav__link" href="#">Условия сервиса</a></li>
                                 <li>
                                     <div class="language">
-                                        <img src="" alt="">
+                                        <a href="#"><img src="icons/globe.png" alt="globe"></a>
+                                        <div class="language__wrapper">
+                                            <a href="#" class="language__item language__item_active">Рус</a>
+                                            <a href="#" class="language__item">Eng</a>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>

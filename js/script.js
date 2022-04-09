@@ -62,24 +62,24 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     //-------------------------------------------------------------- Получение данных через data.json 
 
-    async function getData(data){
-        const res = await fetch(data);
-        if(!res.ok){
-            throw new Error(alert('Invalid server path! Try later :)'));
-        }
+    // async function getData(data){
+    //     const res = await fetch(data);
+    //     if(!res.ok){
+    //         throw new Error(alert('Invalid server path! Try later :)'));
+    //     }
 
-        return await res.json();
-    }
+    //     return await res.json();
+    // }
 
-    getData('data.json')
-    .then(data => {
-        setGoods(data[0], '.headphones');
-        setGoods(data[1], '.wireless-headphones');
-        return data;
-    })
-    .catch(() => {
-        console.log('Error');
-    });
+    // getData('data.json')
+    // .then(data => {
+    //     setGoods(data[0], '.headphones');
+    //     setGoods(data[1], '.wireless-headphones');
+    //     return data;
+    // })
+    // .catch(() => {
+    //     console.log('Error');
+    // });
 
     //-------------------------------------------------------------- Получение данных через массив
 

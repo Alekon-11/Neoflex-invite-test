@@ -114,6 +114,28 @@
         color: $priceColor;
     }
 
+    &__price_old .price-old{
+        font-size: 13px;
+        color: #FFCE7F;
+        text-align: center;
+        text-decoration: line-through;
+    }
+
+    &__price_discount {
+        color: #DF6464;
+        font-size: 19px;
+        right: 65px;
+        .price-discount{
+            position: absolute;
+            top: 2px;
+            font-size: 16px;
+            right: -65px;
+            color: inherit;
+        }
+    }
+
+    
+
     &__rate{
         display: flex;
         align-items: center;

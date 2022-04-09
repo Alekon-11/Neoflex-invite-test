@@ -2,8 +2,9 @@
 
 document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
-    let parent = document.querySelector('.main');
+    const parent = document.querySelector('.main');
     let cart = document.querySelector('#cart');
+    let counter = document.createElement('div');
 
     parent.addEventListener('click', (e) => {
         let cards = document.querySelectorAll('.card');
@@ -11,8 +12,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
         if(e.target && e.target.classList.contains('card__buy-btn')){
             cards.forEach(item => {
                 if(item === e.target.parentNode.parentNode){
+                    // getData('data.json')
+                    // .then(data => {
+                    //     getCardData(data[0], item);
+                    //     getCardData(data[1], item);
+                    //     sessionStorage.setItem(item.getAttribute('data-id'), 1);      // <---- Работа с JSON 
+                    //     addCounter(cart);
+                    // })
+                    // .catch(() => {
+                    //     console.log('Error');
+                    // });
                     getCardData(headphones,item);
                     getCardData(wirelessHeadphones,item);
+                    sessionStorage.setItem(item.getAttribute('data-id'), 1);
                     addCounter(cart);
                 }
             });
@@ -37,36 +49,37 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
     function addCounter(parent){
-        let counter = document.createElement('div');
-
         if(getAllArticle().length){
             counter.classList.add('counter');
             counter.textContent = getAllArticle().length;
             parent.append(counter);
+            return;
         }
+        counter.remove();
     }
 
     addCounter(cart);
 
     //-------------------------------------------------------------- Получение данных через data.json 
 
-    // async function getData(data){
-    //     const res = await fetch(data);
-    //     if(!res.ok){
-    //         throw new Error(alert('Invalid server path! Try later :)'));
-    //     }
+    async function getData(data){
+        const res = await fetch(data);
+        if(!res.ok){
+            throw new Error(alert('Invalid server path! Try later :)'));
+        }
 
-    //     return await res.json();
-    // }
+        return await res.json();
+    }
 
-    // getData('data.json')
-    // .then(data => {
-    //     setGoods(data[0], '.headphones');
-    //     setGoods(data[1], '.wireless-headphones');
-    // })
-    // .catch(() => {
-    //     console.log('Error');
-    // });
+    getData('data.json')
+    .then(data => {
+        setGoods(data[0], '.headphones');
+        setGoods(data[1], '.wireless-headphones');
+        return data;
+    })
+    .catch(() => {
+        console.log('Error');
+    });
 
     //-------------------------------------------------------------- Получение данных через массив
 
@@ -77,7 +90,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             naming: "Apple BYZ S852I",
             price: 2927,
             rate: 4.7,
-            article: "sf8t0001"
+            article: "sf8t0001",
+            oldPrice: 3527
         },
         {
             img: "images/headphones/AppleEarPods.png",
@@ -101,7 +115,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             naming: "Apple BYZ S852I",
             price: 2927,
             rate: 4.7,
-            article: "sf8t0004"
+            article: "sf8t0004",
+            discount: 20
         },
         {
             img: "images/headphones/AppleEarPods.png",
@@ -180,10 +195,26 @@ document.addEventListener('DOMContentLoaded', (e) => {
             const {img, alt, naming, price, rate, article} = list[i];
             new CartItem(img, alt, naming, price, rate, article).addGoods(parentSelector);
         }
+        list.forEach((item,num) => {
+            creatMod(num, '.card', '.card__price', 'card__price_old', 'price-old', item.oldPrice, `${item.oldPrice} ₽`);
+            creatMod(num, '.card', '.card__price', 'card__price_discount', 'price-discount', item.discount, `-${item.discount}%`);
+        });
+    }
+
+
+    function creatMod(n, cardSelector, priceSelector, priceClass, modClass, itemKey, content){
+        if(itemKey){
+            let cards = document.querySelectorAll(cardSelector);
+            let price = cards[n].querySelector(priceSelector);
+            let mod = document.createElement('div');
+            price.classList.add(priceClass);
+            mod.classList.add(modClass);
+            mod.textContent = content;
+            price.append(mod);
+        }
     }
 
     setGoods(headphones, '.headphones');
     setGoods(wirelessHeadphones, '.wireless-headphones');
-
 
 });

@@ -4,23 +4,62 @@ document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
 
     const finalPrice = document.querySelector('.place-order__final-price');
-    let parent = document.querySelector('.main');
+    const parent = document.querySelector('.main');
     let cart = document.querySelector('#cart');
-    let index = 1;
-//-------------------------------------------------------------------------------------
+    let counter = document.createElement('div');
 
     parent.addEventListener('click', (e) => {
-        let cardsCounter = document.querySelectorAll('.selected-goods__counter');
+        let cards = document.querySelectorAll('.selected-goods__item');
         if(e.target && e.target.matches('[data-counter="plus"]')){
-            cardsCounter.forEach((item, num) => {
-                if(item === e.target.parentNode){
-                    
+            cards.forEach(item => {
+                if(item === e.target.parentNode.parentNode){
+                    let current = item.querySelector('span');
+                    ++current.textContent; 
+                    setQuantityItems(item, '.selected-goods__price', '.selected-goods__total',current);
+                }
+            });
+        }
+        if(e.target && e.target.matches('[data-counter="minus"]')){
+            cards.forEach(item => {
+                if(item === e.target.parentNode.parentNode){
+                    let current = item.querySelector('span');
+                    --current.textContent;
+                    setQuantityItems(item, '.selected-goods__price', '.selected-goods__total',current);
                 }
             });
         }
     });
 
-//-------------------------------------------------------------------------------------
+    parent.addEventListener('click', (e) => {
+        let cards = document.querySelectorAll('.selected-goods__item');
+        if(e.target && e.target.parentNode.classList.contains('remove')){
+            cards.forEach(item => {
+                if(item === e.target.parentNode.parentNode){
+                    removeItem(item);
+                }
+            });
+        }
+    });
+
+    function setQuantityItems(elem, priceSelector, totalselectorm, num){
+        let price = elem.querySelector(priceSelector);
+        let total = elem.querySelector(totalselectorm);
+        if(num.textContent <= 0){
+            removeItem(elem);
+        }
+        total.textContent = `${price.textContent.replace(/\D/ig,'') * num.textContent} ₽`;
+        finalPrice.textContent = `₽ ${setFinalPrice(totalselectorm)}`;
+        sessionStorage.setItem(`${elem.getAttribute('data-id')}`, num.textContent);
+
+    }
+
+    function removeItem(elem){
+        elem.remove();
+        sessionStorage.removeItem(`article:${elem.getAttribute('data-id')}`);
+        sessionStorage.removeItem(elem.getAttribute('data-id'));
+        finalPrice.textContent = `₽ ${setFinalPrice('.selected-goods__total')}`;
+        addCounter(cart);
+    }
     
     function setFinalPrice(list){
         let cardsPrice = document.querySelectorAll(list);
@@ -31,11 +70,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
         if(arr.length <= 0){
             return 0;
         }else{
-            return arr.reduce((sum,cur) => sum + cur);
+            return arr.reduce((sum,current) => sum + current);
         }
     }
-
-//-------------------------------------------------------------------------------------
 
     function getAllArticle(){
         let total = [];
@@ -46,23 +83,24 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
     function addCounter(parent){
-        let counter = document.createElement('div');
-
         if(getAllArticle().length){
             counter.classList.add('counter');
             counter.textContent = getAllArticle().length;
             parent.append(counter);
+            return;
         }
+        counter.remove();
     }
 
     addCounter(cart);
 
     class CartItem{
-        constructor(img,naming,price,article){
+        constructor(img,naming,price,article,quantity){
             this.img = img;
             this.naming = naming;
             this.price = price;
             this.article = article;
+            this.quantity = quantity;
         }
 
         addGoods(parentSelector, addingClass){
@@ -78,7 +116,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                                 <div class="selected-goods__price">${this.price} ₽</div>
                                 <div class="selected-goods__counter">
                                     <button data-counter="minus"></button>
-                                    <span>1</span>
+                                    <span>${this.quantity}</span>
                                     <button data-counter="plus"></button>
                                 </div>
                                 <div class="selected-goods__total">${this.price} ₽</div>
@@ -89,16 +127,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
     }
 
-    function setCartItems(list, setPrice){
+    function setCartItems(list){
         list.forEach(item => {
             let {img, naming, price, article} = JSON.parse(sessionStorage.getItem(`${item}`));
-            new CartItem(img, naming, price, article).addGoods('.selected-goods__wrapper', 'selected-goods__item');
+            new CartItem(img, naming, price, article, sessionStorage.getItem(article)).addGoods('.selected-goods__wrapper', 'selected-goods__item');
         });
 
-        finalPrice.textContent = `₽ ${setPrice('.selected-goods__total')}`;
+        document.querySelectorAll('.selected-goods__item').forEach(item => {
+            let current = item.querySelector('span');
+            setQuantityItems(item, '.selected-goods__price', '.selected-goods__total',current);
+        });
 
     }
 
-    setCartItems(getAllArticle(), setFinalPrice);
+    setCartItems(getAllArticle());
 
 });
